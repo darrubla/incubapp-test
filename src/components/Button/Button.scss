@@ -1,0 +1,70 @@
+@import '../../generals.scss';
+
+.Button {
+  display: flex;
+  border: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: $spacing-s;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: white;
+  border: groove;
+  cursor: pointer;
+  @extend .fn-body-1-semi-bold;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.no-behavior {
+    user-select: none;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &[primary] {
+    background-color: $color-main;
+    color: $color-white;
+
+    &:hover {
+      background-color: $main-hover;
+    }
+
+    &:active {
+      background-color: $main-active;
+    }
+
+    &:disabled {
+      background-color: $main-disabled;
+    }
+  }
+
+  &[secondary] {
+    background-color: $color-light-gray;
+    color: $color-white;
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: $color-dark-gray
+    }
+
+    &:active {
+      color: $main-active;
+    }
+
+    &:disabled {
+      color: $main-disabled;
+      border: 1px solid $main-disabled;
+    }
+
+  }
+
+  & svg {
+    position: absolute;
+    left: 12px;
+  }
+}

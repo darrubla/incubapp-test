@@ -1,0 +1,170 @@
+@import './variables.scss';
+
+.fn-h1 {
+  font-family: $fn-nunito;
+  font-size: 28px;
+  letter-spacing: $letter-spacing-s;
+}
+
+.fn-h2 {
+  font-family: $fn-nunito;
+  font-size: 24px;
+  letter-spacing: $letter-spacing-s;
+}
+
+.fn-h3 {
+  font-family: $fn-nunito;
+  font-size: 22px;
+  letter-spacing: $letter-spacing-s;
+}
+
+.fn-h4 {
+  font-family: $fn-nunito;
+  font-size: 20px;
+}
+
+.fn-body-1 {
+  font-family: $fn-nunito;
+  font-size: 18px;
+}
+
+.fn-body-2 {
+  font-family: $fn-nunito;
+  font-size: 16px;
+  letter-spacing: $letter-spacing-s;
+}
+
+.fn-body-3 {
+  font-family: $fn-nunito;
+  font-size: 14px;
+}
+
+.fn-text-1 {
+  font-family: $fn-nunito;
+  font-size: 16px;
+}
+
+.fn-text-2 {
+  font-family: $fn-nunito;
+  font-size: 15px;
+}
+
+.fn-text-3 {
+  font-family: $fn-nunito;
+  font-size: 14px;
+}
+
+.fn-text-4 {
+  font-family: $fn-nunito;
+  font-size: 13px;
+}
+
+.fn-text-5 {
+  font-family: $fn-nunito;
+  font-size: 12px;
+}
+
+.fn-h1-bold {
+  @extend .fn-h1;
+  font-weight: $fw-bold;
+}
+
+.fn-h2-semi-bold {
+  @extend .fn-h2;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-h2-regular {
+  @extend .fn-h2;
+  font-weight: $fw-regular;
+}
+
+.fn-h3-semi-bold {
+  @extend .fn-h3;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-h4-bold {
+  @extend .fn-h4;
+  font-weight: $fw-bold;
+}
+
+.fn-h4-semi-bold {
+  @extend .fn-h4;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-h4-regular {
+  @extend .fn-h4;
+  font-weight: $fw-regular;
+}
+
+.fn-body-1-bold {
+  @extend .fn-body-1;
+  font-weight: $fw-bold;
+}
+
+.fn-body-1-semi-bold {
+  @extend .fn-body-1;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-body-1-regular {
+  @extend .fn-body-1;
+  font-weight: $fw-regular;
+}
+
+.fn-body-2-bold {
+  @extend .fn-body-2;
+  font-weight: $fw-bold;
+}
+
+.fn-body-2-semi-bold {
+  @extend .fn-body-2;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-body-2-regular {
+  @extend .fn-body-2;
+  font-weight: $fw-regular;
+}
+
+.fn-body-3-regular {
+  @extend .fn-body-3;
+  font-weight: $fw-regular;
+}
+
+.fn-text-1-semi-bold {
+  @extend .fn-text-1;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-text-2-semi-bold {
+  @extend .fn-text-2;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-text-3-semi-bold {
+  @extend .fn-text-3;
+  font-weight: $fw-semi-bold;
+}
+
+.fn-text-2-regular {
+  @extend .fn-text-2;
+  font-weight: $fw-regular;
+}
+
+.fn-text-3-regular {
+  @extend .fn-text-3;
+  font-weight: $fw-regular;
+}
+
+.fn-text-4-regular {
+  @extend .fn-text-4;
+  font-weight: $fw-regular;
+}
+
+.fn-text-5-regular {
+  @extend .fn-text-5;
+  font-weight: $fw-regular;
+}

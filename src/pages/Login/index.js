@@ -1,16 +1,37 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useDispatch } from 'react-redux'
 
 import ButtonComponent from '../../components/Button'
 
+import {
+  auth,
+  signInWithEmailAndPassword,
+  signInWithGoogle,
+} from '../../services/firebase'
 import notify from '../../utils/notifyToast'
 import { isValidEmail } from '../../utils'
+import { userLogged } from '../../redux/actions/AuthActions'
 
 import './Login.scss'
 
 function Login() {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (loading) {
+      return
+    }
+    if (user) {
+      navigate('/home')
+      dispatch(userLogged())
+    }
+  }, [user, loading])
 
   const handleSubmit = () => {
     if (password.length < 6) {
@@ -25,6 +46,8 @@ function Login() {
         '!Hola, por favor escribe un correo válido!',
         'error_email'
       )
+    } else {
+      signInWithEmailAndPassword(email, password)
     }
   }
 
@@ -58,7 +81,7 @@ function Login() {
           id="Login-google-btn"
           type="button"
           className="login__btn login__google"
-          action={() => {}}
+          action={signInWithGoogle}
           text="Login with Google"
         />
         <span>

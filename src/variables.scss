@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
 
 //-------------- COLORS -----------------//
-$color-main: #FF452B;
-$color-gray: #FAFAFA;
+$color-main: #76db47;
+$color-gray: #a9aaaa;
 $color-dark-gray: #263238;
 $color-light-gray: rgba($color-dark-gray, 0.7);
-$color-secondary: #99D271;
+$color-secondary: #d2d3d3f5;
 $color-white: white;
 
 //---------- COLOR INTERACTIONS ---------//
-$main-hover: rgb(178, 48, 30);
-$main-active: #f26452;
-$main-disabled: #d1c4c4;
+$main-hover: #47e000;
+$main-active: #9fd686;
+$main-disabled: #b8b8b8;
 
 //--------------- FONTS ------------------//
-$fn-nunito: 'Nunito Sans',
-sans-serif;
+$fn-nunito: "Nunito Sans", sans-serif;
 
 //---------------- SPACING --------------//
 $spacing-xs: 4px;

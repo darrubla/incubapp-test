@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 import Login from './pages/Login'
+import Register from './pages/Register'
 
 export default function RoutesComponent() {
   return (
@@ -11,6 +12,7 @@ export default function RoutesComponent() {
       <Routes>
         {/* Unprotected Routes */}
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <ToastContainer
         position="top-right"

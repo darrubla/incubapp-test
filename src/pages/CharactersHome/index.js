@@ -12,7 +12,7 @@ import {
   GetCharactersList,
   GetLocationsList,
   GetEpisodesList,
-} from '../../redux/actions/HomeActtions';
+} from '../../redux/actions/HomeActions';
 import { auth } from '../../services/firebase';
 
 import './Home.scss';

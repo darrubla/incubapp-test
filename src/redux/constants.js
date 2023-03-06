@@ -1,3 +1,8 @@
 // ----------USER STATUS-------------- //
-export const USER_LOGGED = 'USER_LOGGED'
-export const USER_LOGOUT = 'USER_LOGOUT'
+export const USER_LOGGED = 'USER_LOGGED';
+export const USER_LOGOUT = 'USER_LOGOUT';
+
+// ---------- GET CHARACTERS LIST-------------- //
+export const GET_CHARACTERS_LIST_STARTED = 'GET_CHARACTERS_LIST_STARTED';
+export const GET_CHARACTERS_LIST_SUCCESS = 'GET_CHARACTERS_LIST_SUCCESS';
+export const GET_CHARACTERS_LIST_FAILED = 'GET_CHARACTERS_LIST_FAILED';

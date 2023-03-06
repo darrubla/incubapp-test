@@ -1,12 +1,20 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const urlBase = 'https://rickandmortyapi.com/api'
+const urlBase = 'https://rickandmortyapi.com/api';
 
-export const getCharacterListado = (page = 1) => {
-  const url = `${urlBase}/character/?page=${page}`
+export const getCharactersList = (page = 1) => {
+  const url = `${urlBase}/character/?page=${page}`;
 
   return axios({
     method: 'GET',
     url,
-  })
-}
+  });
+};
+
+export const getLocationList = (page = 1) => {
+  const url = `${urlBase}/location/?page=${page}`;
+  return axios({
+    method: 'GET',
+    url,
+  });
+};

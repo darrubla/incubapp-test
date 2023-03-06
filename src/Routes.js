@@ -1,21 +1,40 @@
-import React from 'react'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+import React from 'react';
+import { Routes, Route, BrowserRouter, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css'
-import Login from './pages/Login'
-import Register from './pages/Register'
+import 'react-toastify/dist/ReactToastify.css';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Layout from './containers/Layout';
+
+import IsLogged from './utils/IsLogged';
 
 export default function RoutesComponent() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Unprotected Routes */}
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path='/' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        {/* Protected Routes */}
+        <Route
+          element={
+            <IsLogged>
+              <Layout>
+                <Outlet />
+              </Layout>
+            </IsLogged>
+          }
+        >
+          <Route path='/home' element={<Home />} />
+        </Route>
+
+        {/* Not Found Route */}
+        <Route path='*' element={<Login />} />
       </Routes>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={2500}
         hideProgressBar={false}
         newestOnTop={false}
@@ -28,5 +47,5 @@ export default function RoutesComponent() {
       {/* Same as */}
       <ToastContainer />
     </BrowserRouter>
-  )
+  );
 }

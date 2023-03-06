@@ -1,0 +1,15 @@
+.home {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  margin-bottom: 24px;
+
+  &__nav-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+
+  margin-top: 7px;
+}

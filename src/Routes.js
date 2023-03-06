@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Home from './pages/Home';
+import Home from './pages/CharactersHome';
 import Layout from './containers/Layout';
 
 import IsLogged from './utils/IsLogged';
@@ -27,7 +27,9 @@ export default function RoutesComponent() {
             </IsLogged>
           }
         >
-          <Route path='/home' element={<Home />} />
+          <Route path='/home/characters' element={<Home />} />
+          <Route path='/home/locations' element={<Home type='location' />} />
+          <Route path='/home/episodes' element={<Home type='episode' />} />
         </Route>
 
         {/* Not Found Route */}

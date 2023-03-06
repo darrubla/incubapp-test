@@ -14,7 +14,7 @@ import './Layout.scss';
 import IsLogged from '../../utils/IsLogged';
 import { userLoggedOut } from '../../redux/actions/AuthActions';
 
-const url = ['/home', '/favorites'];
+const url = ['/home/characters', '/favorites'];
 
 export default function Layout({ children }) {
   const dispatch = useDispatch();

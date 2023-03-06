@@ -34,7 +34,7 @@ export default function Card({ cardItem, user, type }) {
 
   useEffect(() => {
     if (cardItem && docListener) {
-      setFavoritesList(docListener.favorites);
+      setFavoritesList(docListener[type]);
     }
   }, [docListener]);
 
@@ -52,13 +52,49 @@ export default function Card({ cardItem, user, type }) {
     if (!isFavorite) {
       if (docListener !== 0) {
         if (typeof docListener === 'object') {
-          return updateFavorites(cardItem.id, user);
+          return updateFavorites(cardItem.id, user, type);
         }
-        return addFavorites(cardItem.id, user);
+        return addFavorites(cardItem.id, user, type);
       }
     } else {
-      return removeFavorites(cardItem.id, user);
+      return removeFavorites(cardItem.id, user, type);
     }
+  };
+
+  const cardContent = () => {
+    const {
+      id,
+      image,
+      episode,
+      type: locationType,
+      dimension,
+      air_date: date,
+    } = cardItem;
+    if (image) {
+      return <img src={image} alt={`logo cardItem #${id}`} />;
+    }
+    if (episode) {
+      return (
+        <>
+          <p>
+            <strong>Episode:</strong> {episode}
+          </p>
+          <p>
+            <strong>Air Date:</strong> {date}
+          </p>
+        </>
+      );
+    }
+    return (
+      <>
+        <p>
+          <strong>Type:</strong> {locationType}
+        </p>
+        <p>
+          <strong>Dimension:</strong> {dimension}
+        </p>
+      </>
+    );
   };
 
   const handlePokeInfo = () => {
@@ -85,8 +121,8 @@ export default function Card({ cardItem, user, type }) {
               </Icon>
             </Button>
           </div>
-          <div className='card__body'>
-            <img src={image} alt={`logo cardItem #${id}`} />
+          <div className={`card__body ${image ? '' : 'text-left'}`}>
+            {cardContent()}
           </div>
         </Link>
       );

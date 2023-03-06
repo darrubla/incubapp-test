@@ -1,14 +1,14 @@
-import React from 'react';
-import { Routes, Route, BrowserRouter, Outlet } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import React from 'react'
+import { Routes, Route, BrowserRouter, Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
-import 'react-toastify/dist/ReactToastify.css';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Home from './pages/CharactersHome';
-import Layout from './containers/Layout';
+import 'react-toastify/dist/ReactToastify.css'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Layout from './containers/Layout'
 
-import IsLogged from './utils/IsLogged';
+import IsLogged from './utils/IsLogged'
 
 export default function RoutesComponent() {
   return (
@@ -49,5 +49,5 @@ export default function RoutesComponent() {
       {/* Same as */}
       <ToastContainer />
     </BrowserRouter>
-  );
+  )
 }

@@ -1,28 +1,26 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const urlBase = 'https://rickandmortyapi.com/api';
+const urlBase = 'https://rickandmortyapi.com/api'
 
-export const getCharactersList = (page = 1) => {
-  const url = `${urlBase}/character/?page=${page}`;
+export const getList = (type, page = 1) => {
+  const url = `${urlBase}/${type}/?page=${page}`
 
   return axios({
     method: 'GET',
     url,
-  });
-};
+  })
+}
 
-export const getLocationsList = (page = 1) => {
-  const url = `${urlBase}/location/?page=${page}`;
+export const filter = (filters, filterType) => {
+  const { name, status, episode, dimension, gender, type } = filters
+  const typeFilters = {
+    character: `${urlBase}/character/?name=${name}&status=${status}&gender=${gender}`,
+    location: `${urlBase}/location/?name=${name}&type=${type}&dimension=${dimension}`,
+    episode: `${urlBase}/location/?name=${name}&episode=${episode}`,
+  }
+  const url = typeFilters[filterType]
   return axios({
     method: 'GET',
     url,
-  });
-};
-
-export const getEpisodesList = (page = 1) => {
-  const url = `${urlBase}/episode/?page=${page}`;
-  return axios({
-    method: 'GET',
-    url,
-  });
-};
+  })
+}

@@ -1,0 +1,15 @@
+@import '../../generals.scss';
+
+.filters {
+  &-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(219px, 1fr));
+    & select {
+      padding: 10px;
+      font-size: 18px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: inset;
+    }
+  }
+}

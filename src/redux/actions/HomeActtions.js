@@ -29,10 +29,9 @@ const GetCharactersList = (page) => async (dispatch) => {
   dispatch(GetCharactersListStarted());
   try {
     const result = await getCharactersList(page);
-    console.log(result.data.results);
 
     validateServerResponse(result);
-    dispatch(GetCharactersListSuccess(result.data.results));
+    dispatch(GetCharactersListSuccess(result.data));
   } catch (error) {
     notify(
       'error',

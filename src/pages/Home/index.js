@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Container } from '@mui/material';
 import ButtonComponent from '../../components/Button';
 import LoaderComponent from '../../components/Loader';
+import Card from '../../components/Card';
 
 import GetCharactersList from '../../redux/actions/HomeActtions';
 import { auth } from '../../services/firebase';
@@ -16,6 +17,7 @@ function Home({ isloading, charactersList }) {
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
   const [listado, setListado] = useState(null);
+  const [info, setInfo] = useState(null);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -23,29 +25,37 @@ function Home({ isloading, charactersList }) {
   }, [page]);
 
   useEffect(() => {
-    if (charactersList?.length >= 1) {
-      setListado(charactersList);
+    if (charactersList?.results) {
+      setListado(charactersList.results);
+      setInfo(charactersList.info);
     }
   }, [charactersList]);
 
   const handleListado = () => {
     if (listado && user) {
-      return console.log(listado);
+      return listado.map((cardItem) => (
+        <Card
+          user={user.email}
+          key={cardItem.id}
+          cardItem={cardItem}
+          type='character'
+        />
+      ));
     }
     return null;
   };
 
   const handleClick = ({ name }) => {
-    if (name === 'next') setPage(page + 1);
-    if (name === 'back' && page >= 20) setPage(page - 1);
+    if (name === 'next') return setPage(page + 1);
+    return setPage(page - 1);
   };
 
   return (
     <Container>
       <LoaderComponent show={isloading} />
       <section className='home'>{user && handleListado()}</section>
-      {listado?.length >= 20 && (
-        <div className='home__nav-buttons'>
+      <div className='home__nav-buttons'>
+        {info?.prev && (
           <ButtonComponent
             name='back'
             id='Back-btn'
@@ -53,6 +63,8 @@ function Home({ isloading, charactersList }) {
             variant='contained'
             text='< Back'
           />
+        )}
+        {info?.next && (
           <ButtonComponent
             name='next'
             id='Next-btn'
@@ -60,15 +72,15 @@ function Home({ isloading, charactersList }) {
             variant='contained'
             text='Next >'
           />
-        </div>
-      )}
+        )}
+      </div>
     </Container>
   );
 }
 
 Home.propTypes = {
   isloading: PropTypes.bool.isRequired,
-  charactersList: PropTypes.array.isRequired,
+  charactersList: PropTypes.object.isRequired,
 };
 
 function mapStateToProps({

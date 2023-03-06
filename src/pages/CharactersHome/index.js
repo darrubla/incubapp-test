@@ -8,12 +8,22 @@ import ButtonComponent from '../../components/Button';
 import LoaderComponent from '../../components/Loader';
 import Card from '../../components/Card';
 
-import GetCharactersList from '../../redux/actions/HomeActtions';
+import {
+  GetCharactersList,
+  GetLocationsList,
+  GetEpisodesList,
+} from '../../redux/actions/HomeActtions';
 import { auth } from '../../services/firebase';
 
 import './Home.scss';
 
-function Home({ isloading, charactersList }) {
+function Home({
+  isloading,
+  charactersList,
+  locationsList,
+  episodesList,
+  type,
+}) {
   const dispatch = useDispatch();
   const [user] = useAuthState(auth);
   const [listado, setListado] = useState(null);
@@ -21,7 +31,13 @@ function Home({ isloading, charactersList }) {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(GetCharactersList(page));
+    const toDispatch = {
+      character: GetCharactersList(page),
+      location: GetLocationsList(page),
+      episode: GetEpisodesList(page),
+    };
+    console.log(toDispatch[type], type);
+    dispatch(toDispatch[type]);
   }, [page]);
 
   useEffect(() => {
@@ -31,6 +47,20 @@ function Home({ isloading, charactersList }) {
     }
   }, [charactersList]);
 
+  useEffect(() => {
+    if (locationsList?.results) {
+      setListado(locationsList.results);
+      setInfo(locationsList.info);
+    }
+  }, [locationsList]);
+
+  useEffect(() => {
+    if (episodesList?.results) {
+      setListado(episodesList.results);
+      setInfo(episodesList.info);
+    }
+  }, [episodesList]);
+
   const handleListado = () => {
     if (listado && user) {
       return listado.map((cardItem) => (
@@ -38,7 +68,7 @@ function Home({ isloading, charactersList }) {
           user={user.email}
           key={cardItem.id}
           cardItem={cardItem}
-          type='character'
+          type={type}
         />
       ));
     }
@@ -81,14 +111,33 @@ function Home({ isloading, charactersList }) {
 Home.propTypes = {
   isloading: PropTypes.bool.isRequired,
   charactersList: PropTypes.object.isRequired,
+  locationsList: PropTypes.object.isRequired,
+  episodesList: PropTypes.object.isRequired,
+  type: PropTypes.string,
+};
+
+Home.defaultProps = {
+  type: 'character',
 };
 
 function mapStateToProps({
-  Home: { charactersList, charactersListIsLoading },
+  Home: {
+    charactersList,
+    charactersListIsLoading,
+    locationsList,
+    locationsListIsLoading,
+    episodesList,
+    episodesListIsLoading,
+  },
 }) {
   return {
-    isloading: charactersListIsLoading,
+    isloading:
+      charactersListIsLoading ||
+      locationsListIsLoading ||
+      episodesListIsLoading,
     charactersList,
+    locationsList,
+    episodesList,
   };
 }
 

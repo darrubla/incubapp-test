@@ -43,9 +43,16 @@
     place-items: center;
     padding: 0 16px;
 
+    &.text-left p {
+      justify-self: start;
+    }
+
     img {
       width: 70%;
       background-color: white;
+    }
+    p {
+      color: black;
     }
   }
 }

@@ -94,10 +94,10 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   }
 };
 
-const addFavorites = async (id, email) => {
+const addFavorites = async (id, email, type) => {
   try {
     const docRef = await setDoc(doc(db, 'usuarios', email), {
-      favorites: [id],
+      [type]: [id],
     });
   } catch (e) {
     notify(
@@ -108,11 +108,11 @@ const addFavorites = async (id, email) => {
   }
 };
 
-const updateFavorites = async (id, email) => {
+const updateFavorites = async (id, email, type) => {
   const document = doc(db, 'usuarios', email);
   try {
     await updateDoc(document, {
-      favorites: arrayUnion(id),
+      [type]: arrayUnion(id),
     });
   } catch (e) {
     notify(
@@ -123,11 +123,11 @@ const updateFavorites = async (id, email) => {
   }
 };
 
-const removeFavorites = async (id, email) => {
+const removeFavorites = async (id, email, type) => {
   const document = doc(db, 'usuarios', email);
   try {
     await updateDoc(document, {
-      favorites: arrayRemove(id),
+      [type]: arrayRemove(id),
     });
   } catch (e) {
     notify(

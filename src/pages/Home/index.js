@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { connect, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { connect, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { Container } from '@mui/material';
-import ButtonComponent from '../../components/Button';
-import LoaderComponent from '../../components/Loader';
-import Card from '../../components/Card';
+import { Container } from '@mui/material'
+import ButtonComponent from '../../components/Button'
+import LoaderComponent from '../../components/Loader'
+import Card from '../../components/Card'
 
 import {
   GetCharactersList,
   GetLocationsList,
   GetEpisodesList,
-} from '../../redux/actions/HomeActions';
-import { auth } from '../../services/firebase';
+} from '../../redux/actions/HomeActions'
+import { auth } from '../../services/firebase'
 
-import './Home.scss';
+import './Home.scss'
+import Filters from '../../components/Filters'
 
 function Home({
   isloading,
@@ -24,42 +25,41 @@ function Home({
   episodesList,
   type,
 }) {
-  const dispatch = useDispatch();
-  const [user] = useAuthState(auth);
-  const [listado, setListado] = useState(null);
-  const [info, setInfo] = useState(null);
-  const [page, setPage] = useState(1);
+  const dispatch = useDispatch()
+  const [user] = useAuthState(auth)
+  const [listado, setListado] = useState(null)
+  const [info, setInfo] = useState(null)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     const toDispatch = {
       character: GetCharactersList(page),
       location: GetLocationsList(page),
       episode: GetEpisodesList(page),
-    };
-    console.log(toDispatch[type], type);
-    dispatch(toDispatch[type]);
-  }, [page]);
+    }
+    dispatch(toDispatch[type])
+  }, [page])
 
   useEffect(() => {
     if (charactersList?.results) {
-      setListado(charactersList.results);
-      setInfo(charactersList.info);
+      setListado(charactersList.results)
+      setInfo(charactersList.info)
     }
-  }, [charactersList]);
+  }, [charactersList])
 
   useEffect(() => {
     if (locationsList?.results) {
-      setListado(locationsList.results);
-      setInfo(locationsList.info);
+      setListado(locationsList.results)
+      setInfo(locationsList.info)
     }
-  }, [locationsList]);
+  }, [locationsList])
 
   useEffect(() => {
     if (episodesList?.results) {
-      setListado(episodesList.results);
-      setInfo(episodesList.info);
+      setListado(episodesList.results)
+      setInfo(episodesList.info)
     }
-  }, [episodesList]);
+  }, [episodesList])
 
   const handleListado = () => {
     if (listado && user) {
@@ -70,20 +70,23 @@ function Home({
           cardItem={cardItem}
           type={type}
         />
-      ));
+      ))
     }
-    return null;
-  };
+    return null
+  }
 
   const handleClick = ({ name }) => {
-    if (name === 'next') return setPage(page + 1);
-    return setPage(page - 1);
-  };
+    if (name === 'next') return setPage(page + 1)
+    return setPage(page - 1)
+  }
 
   return (
     <Container>
       <LoaderComponent show={isloading} />
-      <section className='home'>{user && handleListado()}</section>
+      <main>
+        <Filters type={type} />
+        <section className='home'>{user && handleListado()}</section>
+      </main>
       <div className='home__nav-buttons'>
         {info?.prev && (
           <ButtonComponent
@@ -105,7 +108,7 @@ function Home({
         )}
       </div>
     </Container>
-  );
+  )
 }
 
 Home.propTypes = {
@@ -114,11 +117,11 @@ Home.propTypes = {
   locationsList: PropTypes.object.isRequired,
   episodesList: PropTypes.object.isRequired,
   type: PropTypes.string,
-};
+}
 
 Home.defaultProps = {
   type: 'character',
-};
+}
 
 function mapStateToProps({
   Home: {
@@ -138,7 +141,7 @@ function mapStateToProps({
     charactersList,
     locationsList,
     episodesList,
-  };
+  }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home)

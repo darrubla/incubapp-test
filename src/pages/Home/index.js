@@ -23,6 +23,7 @@ function Home({
   charactersList,
   locationsList,
   episodesList,
+  filterCharacterList,
   type,
 }) {
   const dispatch = useDispatch()
@@ -60,6 +61,15 @@ function Home({
       setInfo(episodesList.info)
     }
   }, [episodesList])
+
+  useEffect(() => {
+    if (filterCharacterList?.results) {
+      setListado(filterCharacterList.results)
+      setInfo(filterCharacterList.info)
+    } else {
+      setPage(1)
+    }
+  }, [filterCharacterList])
 
   const handleListado = () => {
     if (listado && user) {
@@ -116,6 +126,7 @@ Home.propTypes = {
   charactersList: PropTypes.object.isRequired,
   locationsList: PropTypes.object.isRequired,
   episodesList: PropTypes.object.isRequired,
+  filterCharacterList: PropTypes.object.isRequired,
   type: PropTypes.string,
 }
 
@@ -132,15 +143,18 @@ function mapStateToProps({
     episodesList,
     episodesListIsLoading,
   },
+  Filter: { filterCharacter, filterCharacterListIsLoading },
 }) {
   return {
     isloading:
       charactersListIsLoading ||
       locationsListIsLoading ||
-      episodesListIsLoading,
+      episodesListIsLoading ||
+      filterCharacterListIsLoading,
     charactersList,
     locationsList,
     episodesList,
+    filterCharacterList: filterCharacter,
   }
 }
 
